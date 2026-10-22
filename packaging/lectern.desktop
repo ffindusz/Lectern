@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Lectern
+GenericName=Markdown Viewer
+Comment=Fast, read-only Markdown viewer
+Exec=lectern %f
+Icon=lectern
+Terminal=false
+Categories=Utility;Viewer;TextTools;
+MimeType=text/markdown;text/x-markdown;
+Keywords=markdown;md;viewer;readme;

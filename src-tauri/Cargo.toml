@@ -1,0 +1,51 @@
+[package]
+name = "lectern"
+version = "0.1.0"
+description = "A fast, lightweight, read-only Markdown viewer"
+edition = "2024"
+rust-version = "1.85"
+default-run = "lectern"
+
+[lib]
+name = "lectern_lib"
+crate-type = ["rlib"]
+
+[[bin]]
+name = "lectern"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+embed-resource = "3"
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+tauri-plugin-opener = "2"
+
+comrak = { version = "0.56", default-features = false }
+ammonia = "4"
+syntect = { version = "5", default-features = false, features = ["default-syntaxes", "html", "regex-fancy"] }
+notify = { version = "8", default-features = false, features = ["macos_fsevent"] }
+directories = "6"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "1"
+percent-encoding = "2"
+
+[dev-dependencies]
+tempfile = "3"
+
+[features]
+# There is no dev server: the UI is always served from the embedded `ui/` folder, so the
+# production asset protocol is on by default and a plain `cargo build --release` is a
+# complete release build.
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 3
+panic = "abort"
+strip = true

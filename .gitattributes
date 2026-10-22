@@ -1,0 +1,12 @@
+# Normalise text files to LF in the repository.
+* text=auto eol=lf
+*.png binary
+*.gif binary
+*.jpg binary
+*.webp binary
+*.ico binary
+*.woff2 binary
+
+# Third-party code and fonts: exclude from GitHub language statistics and diffs.
+ui/vendor/** linguist-vendored -diff
+ui/fonts/** linguist-vendored

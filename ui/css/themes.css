@@ -1,0 +1,244 @@
+/*
+ * Themes.
+ *
+ * A theme is ONE block `:root[data-theme="<id>"] { … }` defining every variable below.
+ * The app discovers themes by scanning this stylesheet, so adding a block is all it takes:
+ * it appears in the settings popover and in the Ctrl+Shift+T cycle, using `--theme-name`
+ * as its label. Code highlighting (syntax.css), Mermaid diagrams (read via
+ * getComputedStyle) and Graphviz output all derive their colours from these variables.
+ *
+ * Variables:
+ *   --theme-name        label shown in the UI (a CSS string)
+ *   color-scheme        light | dark (native scrollbars, form controls; dark → Mermaid darkMode)
+ *   --bg --fg --muted --border --link --accent
+ *   --chrome-bg         toolbar / sidebar / popover background
+ *   --hover             hover background for buttons and TOC entries
+ *   --selection         text selection background
+ *   --code-bg --inline-code-bg
+ *   --mark-bg --mark-fg --mark-current   find-in-page highlights
+ *   --diagram-fill --diagram-fill-2 --diagram-fill-3 --diagram-stroke --diagram-line --diagram-note
+ *   --syn-comment --syn-keyword --syn-string --syn-number --syn-function --syn-type
+ *   --syn-variable --syn-tag --syn-attr --syn-operator --syn-inserted --syn-deleted
+ */
+
+:root[data-theme="light"] {
+  --theme-name: "Light";
+  color-scheme: light;
+  --bg: #ffffff;
+  --fg: #1f2328;
+  --muted: #59636e;
+  --border: #d1d9e0;
+  --link: #0969da;
+  --accent: #0969da;
+  --chrome-bg: #f6f8fa;
+  --hover: rgba(31, 35, 40, 0.07);
+  --selection: #b6d7ff;
+  --code-bg: #f6f8fa;
+  --inline-code-bg: rgba(129, 139, 152, 0.16);
+  --mark-bg: #fff3a3;
+  --mark-fg: inherit;
+  --mark-current: #ffb13b;
+  --diagram-fill: #eaf2fd;
+  --diagram-fill-2: #fdf1e1;
+  --diagram-fill-3: #e7f5ea;
+  --diagram-stroke: #5578b4;
+  --diagram-line: #57606a;
+  --diagram-note: #fff8c5;
+  --syn-comment: #59636e;
+  --syn-keyword: #cf222e;
+  --syn-string: #0a3069;
+  --syn-number: #0550ae;
+  --syn-function: #6639ba;
+  --syn-type: #953800;
+  --syn-variable: #1f2328;
+  --syn-tag: #116329;
+  --syn-attr: #0550ae;
+  --syn-operator: #cf222e;
+  --syn-inserted: #116329;
+  --syn-deleted: #82071e;
+}
+
+:root[data-theme="dark"] {
+  --theme-name: "Dark";
+  color-scheme: dark;
+  --bg: #0d1117;
+  --fg: #e6edf3;
+  --muted: #9198a1;
+  --border: #3d444d;
+  --link: #4493f8;
+  --accent: #4493f8;
+  --chrome-bg: #151b23;
+  --hover: rgba(230, 237, 243, 0.08);
+  --selection: rgba(56, 139, 253, 0.4);
+  --code-bg: #151b23;
+  --inline-code-bg: rgba(101, 108, 118, 0.3);
+  --mark-bg: #5c4813;
+  --mark-fg: inherit;
+  --mark-current: #b07b0e;
+  --diagram-fill: #1b2a40;
+  --diagram-fill-2: #3a2b14;
+  --diagram-fill-3: #17301f;
+  --diagram-stroke: #4493f8;
+  --diagram-line: #9198a1;
+  --diagram-note: #3b3416;
+  --syn-comment: #9198a1;
+  --syn-keyword: #ff7b72;
+  --syn-string: #a5d6ff;
+  --syn-number: #79c0ff;
+  --syn-function: #d2a8ff;
+  --syn-type: #ffa657;
+  --syn-variable: #e6edf3;
+  --syn-tag: #7ee787;
+  --syn-attr: #79c0ff;
+  --syn-operator: #ff7b72;
+  --syn-inserted: #aff5b4;
+  --syn-deleted: #ffa198;
+}
+
+:root[data-theme="sepia"] {
+  --theme-name: "Sepia";
+  color-scheme: light;
+  --bg: #f4ecd8;
+  --fg: #3f3122;
+  --muted: #7a6650;
+  --border: #d9c9a6;
+  --link: #9c4a1a;
+  --accent: #9c4a1a;
+  --chrome-bg: #ebe0c4;
+  --hover: rgba(91, 70, 40, 0.09);
+  --selection: #e2c890;
+  --code-bg: #ebe1c7;
+  --inline-code-bg: rgba(140, 110, 60, 0.15);
+  --mark-bg: #f3d26b;
+  --mark-fg: inherit;
+  --mark-current: #e09a3a;
+  --diagram-fill: #eadfc2;
+  --diagram-fill-2: #e8d3b3;
+  --diagram-fill-3: #dfe2c2;
+  --diagram-stroke: #9c7b4f;
+  --diagram-line: #6d5a44;
+  --diagram-note: #f2e2a8;
+  --syn-comment: #8b7a62;
+  --syn-keyword: #a3392b;
+  --syn-string: #5a7a1f;
+  --syn-number: #9a5b13;
+  --syn-function: #285e8e;
+  --syn-type: #7b4f9d;
+  --syn-variable: #3f3122;
+  --syn-tag: #2e6e5c;
+  --syn-attr: #9a5b13;
+  --syn-operator: #a3392b;
+  --syn-inserted: #4f7a28;
+  --syn-deleted: #a3392b;
+}
+
+:root[data-theme="solarized-light"] {
+  --theme-name: "Solarized Light";
+  color-scheme: light;
+  --bg: #fdf6e3;
+  --fg: #586e75;
+  --muted: #839496;
+  --border: #e3dbc3;
+  --link: #268bd2;
+  --accent: #268bd2;
+  --chrome-bg: #eee8d5;
+  --hover: rgba(88, 110, 117, 0.09);
+  --selection: #e6dcbc;
+  --code-bg: #eee8d5;
+  --inline-code-bg: #eee8d5;
+  --mark-bg: #f3df9b;
+  --mark-fg: inherit;
+  --mark-current: #e0b345;
+  --diagram-fill: #eee8d5;
+  --diagram-fill-2: #f6e7c6;
+  --diagram-fill-3: #e5ecd3;
+  --diagram-stroke: #268bd2;
+  --diagram-line: #657b83;
+  --diagram-note: #f6e6b0;
+  --syn-comment: #93a1a1;
+  --syn-keyword: #859900;
+  --syn-string: #2aa198;
+  --syn-number: #d33682;
+  --syn-function: #268bd2;
+  --syn-type: #b58900;
+  --syn-variable: #586e75;
+  --syn-tag: #268bd2;
+  --syn-attr: #6c71c4;
+  --syn-operator: #859900;
+  --syn-inserted: #859900;
+  --syn-deleted: #dc322f;
+}
+
+:root[data-theme="nord"] {
+  --theme-name: "Nord";
+  color-scheme: dark;
+  --bg: #2e3440;
+  --fg: #d8dee9;
+  --muted: #9aa5b8;
+  --border: #4c566a;
+  --link: #88c0d0;
+  --accent: #88c0d0;
+  --chrome-bg: #3b4252;
+  --hover: rgba(216, 222, 233, 0.08);
+  --selection: #4c566a;
+  --code-bg: #3b4252;
+  --inline-code-bg: #434c5e;
+  --mark-bg: #6b5d3f;
+  --mark-fg: inherit;
+  --mark-current: #a8834a;
+  --diagram-fill: #3b4252;
+  --diagram-fill-2: #434c5e;
+  --diagram-fill-3: #4c566a;
+  --diagram-stroke: #88c0d0;
+  --diagram-line: #d8dee9;
+  --diagram-note: #4c566a;
+  --syn-comment: #7b88a1;
+  --syn-keyword: #81a1c1;
+  --syn-string: #a3be8c;
+  --syn-number: #b48ead;
+  --syn-function: #88c0d0;
+  --syn-type: #8fbcbb;
+  --syn-variable: #d8dee9;
+  --syn-tag: #81a1c1;
+  --syn-attr: #8fbcbb;
+  --syn-operator: #81a1c1;
+  --syn-inserted: #a3be8c;
+  --syn-deleted: #bf616a;
+}
+
+:root[data-theme="high-contrast"] {
+  --theme-name: "High Contrast";
+  color-scheme: dark;
+  --bg: #000000;
+  --fg: #ffffff;
+  --muted: #e0e0e0;
+  --border: #ffffff;
+  --link: #ffff00;
+  --accent: #00ffff;
+  --chrome-bg: #000000;
+  --hover: #333333;
+  --selection: #0055aa;
+  --code-bg: #000000;
+  --inline-code-bg: #262626;
+  --mark-bg: #ffff00;
+  --mark-fg: #000000;
+  --mark-current: #00ffff;
+  --diagram-fill: #000000;
+  --diagram-fill-2: #1f1f1f;
+  --diagram-fill-3: #000000;
+  --diagram-stroke: #ffffff;
+  --diagram-line: #ffffff;
+  --diagram-note: #333300;
+  --syn-comment: #c8c8c8;
+  --syn-keyword: #ff8cff;
+  --syn-string: #7fffd4;
+  --syn-number: #ffc070;
+  --syn-function: #8fd4ff;
+  --syn-type: #ffff80;
+  --syn-variable: #ffffff;
+  --syn-tag: #80ff80;
+  --syn-attr: #ffc070;
+  --syn-operator: #ff8cff;
+  --syn-inserted: #80ff80;
+  --syn-deleted: #ff8c8c;
+}

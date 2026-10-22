@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lectern</title>
+  <link rel="icon" href="img/favicon.png">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/content.css">
+  <link rel="stylesheet" href="css/syntax.css">
+  <link rel="stylesheet" href="css/print.css" media="print">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <header id="lec-toolbar">
+    <div class="menu" id="lec-file-menu">
+      <button class="tb-btn" id="lec-file-btn" aria-haspopup="menu" aria-expanded="false" title="File">
+        File
+        <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="popover" id="lec-file-dropdown" role="menu" hidden>
+        <button class="menu-item" data-action="open" role="menuitem"><span class="label">Open…</span><kbd>Ctrl+O</kbd></button>
+        <button class="menu-item" data-action="reload" role="menuitem"><span class="label">Reload</span><kbd>Ctrl+R</kbd></button>
+        <button class="menu-item" data-action="print" role="menuitem"><span class="label">Print / Save as PDF…</span><kbd>Ctrl+P</kbd></button>
+        <div class="menu-sep"></div>
+        <div class="menu-heading">Recent files</div>
+        <div id="lec-recent-list"></div>
+        <button class="menu-item" data-action="clear-recent" role="menuitem"><span class="label">Clear recent files</span></button>
+        <div class="menu-sep"></div>
+        <button class="menu-item" data-action="close" role="menuitem"><span class="label">Close window</span><kbd>Ctrl+W</kbd></button>
+      </div>
+    </div>
+    <button class="tb-btn" id="lec-toc-btn" title="Table of contents (Ctrl+\)" aria-pressed="false">
+      <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h11M4 18h14"/></svg>
+    </button>
+    <button class="tb-btn" id="lec-back-btn" title="Back (Alt+Left)" disabled>
+      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="tb-btn" id="lec-fwd-btn" title="Forward (Alt+Right)" disabled>
+      <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <button id="lec-path" title="No file open" disabled><span class="path-dir"></span><span class="path-name"></span></button>
+    <button class="tb-btn" id="lec-reload-btn" title="Reload (Ctrl+R)" disabled>
+      <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg>
+    </button>
+    <button class="tb-btn" id="lec-find-btn" title="Find (Ctrl+F)" disabled>
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg>
+    </button>
+    <button class="tb-btn" id="lec-settings-btn" title="Appearance (Ctrl+,)" aria-expanded="false">
+      <svg viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg>
+    </button>
+  </header>
+
+  <div class="popover" id="lec-settings-popover" role="dialog" aria-label="Appearance" hidden>
+    <div class="setting">
+      <label for="lec-set-theme">Theme <kbd>Ctrl+Shift+T</kbd></label>
+      <select id="lec-set-theme"></select>
+    </div>
+    <div class="setting">
+      <label for="lec-set-body-font">Text font</label>
+      <select id="lec-set-body-font"></select>
+    </div>
+    <div class="setting">
+      <label for="lec-set-code-font">Code font</label>
+      <select id="lec-set-code-font"></select>
+    </div>
+    <div class="setting">
+      <span class="setting-label">Font size</span>
+      <div class="stepper">
+        <button id="lec-size-down" title="Smaller (Ctrl+−)">−</button>
+        <output id="lec-size-value">16px</output>
+        <button id="lec-size-up" title="Larger (Ctrl++)">+</button>
+        <button id="lec-size-reset" class="reset" title="Reset (Ctrl+0)">Reset</button>
+      </div>
+    </div>
+    <div class="setting">
+      <span class="setting-label">Content width</span>
+      <div class="segmented" id="lec-set-width">
+        <button data-width="narrow">Narrow</button>
+        <button data-width="medium">Medium</button>
+        <button data-width="wide">Wide</button>
+        <button data-width="full">Full</button>
+      </div>
+    </div>
+    <div class="setting">
+      <label class="check"><input type="checkbox" id="lec-set-toc"> Show table of contents <kbd>Ctrl+\</kbd></label>
+    </div>
+  </div>
+
+  <div id="lec-findbar" role="search" hidden>
+    <input id="lec-find-input" type="text" placeholder="Find in document" spellcheck="false" autocomplete="off">
+    <span id="lec-find-count"></span>
+    <button class="tb-btn" id="lec-find-prev" title="Previous (Shift+Enter)">
+      <svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg>
+    </button>
+    <button class="tb-btn" id="lec-find-next" title="Next (Enter)">
+      <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <button class="tb-btn" id="lec-find-close" title="Close (Esc)">
+      <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+
+  <div id="lec-layout">
+    <nav id="lec-toc" aria-label="Table of contents">
+      <div class="toc-title">Contents</div>
+      <ul id="lec-toc-list"></ul>
+    </nav>
+    <main id="lec-scroller" tabindex="-1">
+      <div id="lec-welcome" hidden>
+        <img src="img/logo.png" alt="">
+        <h1>Lectern</h1>
+        <div>A fast, read-only Markdown viewer.</div>
+        <div id="lec-welcome-error" class="error" hidden></div>
+        <button class="primary" data-action="open">Open a Markdown file…</button>
+        <div>or drop one onto this window · <kbd>Ctrl+O</kbd></div>
+        <div id="lec-welcome-recent"></div>
+      </div>
+      <article id="lec-doc" class="markdown-body empty"></article>
+    </main>
+  </div>
+
+  <div id="lec-drop-overlay" hidden>Drop a Markdown file to open it</div>
+  <div id="lec-lightbox" class="fit" hidden><img alt=""><div class="caption"></div></div>
+  <div id="lec-toast" role="status" aria-live="polite"></div>
+</body>
+</html>
